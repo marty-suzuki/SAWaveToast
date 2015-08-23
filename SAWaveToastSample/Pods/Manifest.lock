@@ -1,0 +1,14 @@
+PODS:
+  - SAWaveToast (0.1.0)
+
+DEPENDENCIES:
+  - SAWaveToast (from `../`)
+
+EXTERNAL SOURCES:
+  SAWaveToast:
+    :path: ../
+
+SPEC CHECKSUMS:
+  SAWaveToast: 6e34c3503462eb4f2ea2d5ef2aca461c1afa12ed
+
+COCOAPODS: 0.36.1

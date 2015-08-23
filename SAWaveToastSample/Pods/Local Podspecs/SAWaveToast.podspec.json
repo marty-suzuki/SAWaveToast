@@ -1,0 +1,21 @@
+{
+  "name": "SAWaveToast",
+  "version": "0.1.0",
+  "summary": "A short description of SAWaveToast.",
+  "description": "",
+  "homepage": "https://github.com/SzkAtmosphere/SAWaveToast",
+  "license": "MIT",
+  "authors": {
+    "Taiki Suzuki": "s1180183@gmail.com"
+  },
+  "source": {
+    "git": "https://github.com/szk-atmosphere/SAWaveToast",
+    "tag": "0.1.0"
+  },
+  "social_media_url": "https://twitter.com/SzkAtmosphere",
+  "platforms": {
+    "ios": "8.0"
+  },
+  "requires_arc": true,
+  "source_files": "SAWaveToast/*.{swift}"
+}

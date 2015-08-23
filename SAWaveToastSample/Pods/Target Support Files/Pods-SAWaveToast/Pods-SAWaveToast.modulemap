@@ -1,0 +1,6 @@
+framework module SAWaveToast {
+  umbrella header "Pods-SAWaveToast-umbrella.h"
+
+  export *
+  module * { export * }
+}

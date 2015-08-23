@@ -1,8 +1,15 @@
+//
+//  SAWaveToastSampleTests.swift
+//  SAWaveToastSampleTests
+//
+//  Created by 鈴木大貴 on 2015/08/24.
+//  Copyright (c) 2015年 Taiki Suzuki. All rights reserved.
+//
+
 import UIKit
 import XCTest
-import SAWaveToast
 
-class Tests: XCTestCase {
+class SAWaveToastSampleTests: XCTestCase {
     
     override func setUp() {
         super.setUp()
