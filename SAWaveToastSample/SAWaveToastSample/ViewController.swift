@@ -26,8 +26,8 @@ class ViewController: UIViewController {
     }
     
     @IBAction func showWaveToast(sender: AnyObject) {
-        let controller = SAWaveToast(text: "Sample text. Sample text.Sample text. Sample text. Sample text. Sample text. Sample text. Sample text. Sample text. Sample text. Sample text. Sample text. Sample text. Sample text. Sample text. Sample text. Sample text. Sample text. ", waveColor: nil)
-        presentViewController(controller, animated: false, completion: nil)
+        let waveToast = SAWaveToast(text: "This is SAWaveToast!! SAWaveToast has wave and text floating animation. Default appearance time is 5 seconds.", font: .systemFontOfSize(16), fontColor: .darkGrayColor())
+        presentViewController(waveToast, animated: false, completion: nil)
     }
 }
 

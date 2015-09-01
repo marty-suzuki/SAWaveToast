@@ -18,38 +18,61 @@ public class SAWaveToast: UIViewController {
     private let contentView: UIView = UIView()
     private let textView: UITextView = UITextView()
     private var waveColor: UIColor = .cyanColor()
-    private var text: String = ""
+    private var attributedText: NSMutableAttributedString = NSMutableAttributedString()
     private var stopAnimation: Bool = false
+    private var duration: NSTimeInterval = 5
     
     //Constrants
     private var containerViewBottomConstraint: NSLayoutConstraint?
-    private var textViewLeftConstraint: NSLayoutConstraint?
-    private var textViewRightConstraint: NSLayoutConstraint?
+    private var textViewCenterXConstraint: NSLayoutConstraint?
     
-    public init(text: String, waveColor: UIColor? = nil) {
+    public convenience init(text: String, font: UIFont? = nil, fontColor: UIColor? = nil, waveColor: UIColor? = nil, duration: NSTimeInterval? = nil) {
+        var attributes: [NSObject : AnyObject] = [NSObject : AnyObject]()
+        if let font = font {
+            attributes[NSFontAttributeName] = font
+        }
+        if let fontColor = fontColor {
+            attributes[NSForegroundColorAttributeName] = fontColor
+        }
+        self.init(attributedText: NSAttributedString(string: text, attributes: attributes), waveColor: waveColor, duration: duration)
+    }
+    
+    public init(attributedText: NSAttributedString, waveColor: UIColor? = nil, duration: NSTimeInterval? = nil) {
         super.init(nibName: nil, bundle: nil)
         if let waveColor = waveColor {
             self.waveColor = waveColor
         }
-        self.text = text
+        if let duration = duration {
+            self.duration = duration
+        }
+        self.attributedText.appendAttributedString(attributedText)
         waveView.color = self.waveColor
+        
+        switch UIDevice.currentDevice().systemVersion.compare("8.0.0", options: NSStringCompareOptions.NumericSearch) {
+            case .OrderedSame, .OrderedDescending:
+                providesPresentationContextTransitionStyle = true
+                definesPresentationContext = true
+                modalPresentationStyle = .OverCurrentContext
+            case .OrderedAscending:
+                modalPresentationStyle = .CurrentContext
+        }
+        
     }
-
+    
     required public init(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    deinit {}
     
     public override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        view.backgroundColor = .whiteColor()
+        view.backgroundColor = .clearColor()
         
         let width = UIScreen.mainScreen().bounds.size.width - SAWaveToast.Spaces.left + SAWaveToast.Spaces.right
-        
-        let attributedText = NSAttributedString(string: text)
         let textHeight = attributedText.boundingRectWithSize(CGSize(width: width, height: CGFloat.max), options: .UsesLineFragmentOrigin | .UsesFontLeading, context: nil).size.height
-        
         
         setContainerView(textHeight)
         setWaveView(textHeight)
@@ -65,14 +88,14 @@ public class SAWaveToast: UIViewController {
         super.viewDidAppear(animated)
         
         waveView.startAnimation()
+        floatingAnimation()
+        
         containerViewBottomConstraint?.constant = 0
         UIView.animateWithDuration(0.5, delay: 0, options: .CurveEaseOut, animations: {
             self.containerView.layoutIfNeeded()
-        }) { finished in
-            self.floatingAnimation()
-        }
+        }, completion: nil)
         
-        let delay = 5.0 * Double(NSEC_PER_SEC)
+        let delay = duration * Double(NSEC_PER_SEC)
         let time  = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
         dispatch_after(time, dispatch_get_main_queue()) {
             self.stopAnimation = true
@@ -82,15 +105,6 @@ public class SAWaveToast: UIViewController {
     override public func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }
-    
-    func willDisappearToast() {
-        containerViewBottomConstraint?.constant = containerView.frame.size.height
-        UIView.animateWithDuration(0.5, delay: 0, options: .CurveEaseIn, animations: {
-            self.containerView.layoutIfNeeded()
-        }) { finished in
-            self.dismissViewControllerAnimated(false, completion: nil)
-        }
     }
 }
 
@@ -139,28 +153,33 @@ extension SAWaveToast {
         textView.backgroundColor = .clearColor()
         textView.setTranslatesAutoresizingMaskIntoConstraints(false)
         textView.userInteractionEnabled = false
-        
         textView.contentInset = UIEdgeInsets(top: -10, left: -4, bottom: 0, right: 0)
-        let rightConstraint = NSLayoutConstraint(item: textView, attribute: .Right, relatedBy: .Equal, toItem: contentView, attribute: .Right, multiplier: 1, constant: -SAWaveToast.Spaces.right)
-        let leftConstraint = NSLayoutConstraint(item: textView, attribute: .Left, relatedBy: .Equal, toItem: contentView, attribute: .Left, multiplier: 1, constant: SAWaveToast.Spaces.left)
+        let width = UIScreen.mainScreen().bounds.size.width - (SAWaveToast.Spaces.right + SAWaveToast.Spaces.left)
+        let centerXConstraint = NSLayoutConstraint(item: textView, attribute: .CenterX, relatedBy: .Equal, toItem: contentView, attribute: .CenterX, multiplier: 1, constant: 0)
         contentView.addConstraints([
-            leftConstraint,
+            centerXConstraint,
             NSLayoutConstraint(item: textView, attribute: .Bottom, relatedBy: .Equal, toItem: contentView, attribute: .Bottom, multiplier: 1, constant: -(SAWaveToast.Spaces.bottom + SAWaveToast.ExtraSpace)),
-            rightConstraint,
+            NSLayoutConstraint(item: textView, attribute: .Width, relatedBy: .Equal, toItem: nil, attribute: .Width, multiplier: 1, constant: width),
             NSLayoutConstraint(item: textView, attribute: .Top, relatedBy: .Equal, toItem: contentView, attribute: .Top, multiplier: 1, constant: SAWaveToast.Spaces.top)
         ])
-        textViewLeftConstraint = leftConstraint
-        textViewRightConstraint = rightConstraint
-        textView.text = text
+        textViewCenterXConstraint = centerXConstraint
+        textView.attributedText = attributedText
+    }
+    
+    private func willDisappearToast() {
+        containerViewBottomConstraint?.constant = containerView.frame.size.height
+        UIView.animateWithDuration(0.5, delay: 0, options: .CurveEaseIn, animations: {
+            self.containerView.layoutIfNeeded()
+        }) { finished in
+            self.dismissViewControllerAnimated(false, completion: nil)
+        }
     }
     
     private func floatingAnimation() {
         stopAnimation = false
-        let totalValue = (SAWaveToast.Spaces.left + SAWaveToast.Spaces.right) / 2
-        let leftSpace = (CGFloat(arc4random_uniform(UINT32_MAX)) / CGFloat(UINT32_MAX) ) * totalValue
-        let rightSpace = totalValue - leftSpace
-        textViewLeftConstraint?.constant = leftSpace + totalValue
-        textViewRightConstraint?.constant = rightSpace + totalValue
+        let totalValue = (SAWaveToast.Spaces.left + SAWaveToast.Spaces.right) / 4
+        let delta = (CGFloat(arc4random_uniform(UINT32_MAX)) / CGFloat(UINT32_MAX) ) * totalValue
+        textViewCenterXConstraint?.constant = (arc4random_uniform(UINT32_MAX) % 2 == 0) ? delta : -delta
         if containerViewBottomConstraint?.constant == 0 {
             containerViewBottomConstraint?.constant = SAWaveToast.ExtraSpace
         } else {

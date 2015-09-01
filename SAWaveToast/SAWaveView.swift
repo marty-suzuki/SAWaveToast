@@ -29,6 +29,8 @@ class SAWaveView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    deinit {}
+    
     override func layoutSubviews() {
         super.layoutSubviews()
         shapeLayer.frame = CGRect(x: 0, y: 0, width: bounds.size.width * 2, height: bounds.size.height)
