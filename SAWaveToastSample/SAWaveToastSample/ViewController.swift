@@ -24,7 +24,7 @@ class ViewController: UIViewController {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
-        let controller = SAWaveToast()
+        let controller = SAWaveToast(text: "Sample text.", waveColor: nil)
         presentViewController(controller, animated: false, completion: nil)
     }
 }

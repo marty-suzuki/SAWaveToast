@@ -13,6 +13,7 @@
 		5862417949DB48CAB10B6200 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B83F1F363CA2C927CE14B2B6 /* Foundation.framework */; };
 		7DA2647BB80D17D3599978A5 /* Pods-SAWaveToast-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 884579E0540ECA3DFE53613F /* Pods-SAWaveToast-dummy.m */; };
 		92445DFFEDF3D1B56C478EBC /* SAWaveToast.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7C205F0CDB4BFA2C1AF05ED /* SAWaveToast.swift */; };
+		9D7F9E291B94110C001E3DB3 /* SAWaveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D7F9E271B9410D0001E3DB3 /* SAWaveView.swift */; };
 		FE3EEF41F68F54AB3D7A6BF1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B83F1F363CA2C927CE14B2B6 /* Foundation.framework */; };
 /* End PBXBuildFile section */
 
@@ -39,6 +40,7 @@
 		884579E0540ECA3DFE53613F /* Pods-SAWaveToast-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-SAWaveToast-dummy.m"; sourceTree = "<group>"; };
 		886EBE60D00282F4E240E31B /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Pods.release.xcconfig; sourceTree = "<group>"; };
 		98DC2366FAC25118D706B407 /* Pods-SAWaveToast.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SAWaveToast.xcconfig"; sourceTree = "<group>"; };
+		9D7F9E271B9410D0001E3DB3 /* SAWaveView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SAWaveView.swift; sourceTree = "<group>"; };
 		9DF05312CF7555180ECE9176 /* Pods-SAWaveToast-Private.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SAWaveToast-Private.xcconfig"; sourceTree = "<group>"; };
 		A1BF768D19DC530B512A04B0 /* Pods.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = Pods.modulemap; sourceTree = "<group>"; };
 		A7C205F0CDB4BFA2C1AF05ED /* SAWaveToast.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SAWaveToast.swift; sourceTree = "<group>"; };
@@ -76,6 +78,7 @@
 			isa = PBXGroup;
 			children = (
 				A7C205F0CDB4BFA2C1AF05ED /* SAWaveToast.swift */,
+				9D7F9E271B9410D0001E3DB3 /* SAWaveView.swift */,
 			);
 			path = SAWaveToast;
 			sourceTree = "<group>";
@@ -272,6 +275,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9D7F9E291B94110C001E3DB3 /* SAWaveView.swift in Sources */,
 				7DA2647BB80D17D3599978A5 /* Pods-SAWaveToast-dummy.m in Sources */,
 				92445DFFEDF3D1B56C478EBC /* SAWaveToast.swift in Sources */,
 			);
@@ -293,6 +297,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 886EBE60D00282F4E240E31B /* Pods.release.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -356,6 +361,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 78C2308440F8D91CB60C57B0 /* Pods.debug.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
