@@ -21,6 +21,13 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
-
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+    }
+    
+    @IBAction func showWaveToast(sender: AnyObject) {
+        let waveToast = SAWaveToast(text: "This is SAWaveToast!! SAWaveToast has wave and text floating animation. Default appearance time is 5 seconds.", font: .systemFontOfSize(16), fontColor: .darkGrayColor())
+        presentViewController(waveToast, animated: false, completion: nil)
+    }
 }
 

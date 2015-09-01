@@ -1,24 +1,78 @@
 # SAWaveToast
 
-[![CI Status](http://img.shields.io/travis/Taiki Suzuki/SAWaveToast.svg?style=flat)](https://travis-ci.org/Taiki Suzuki/SAWaveToast)
+[![Platform](http://img.shields.io/badge/platform-ios-blue.svg?style=flat
+)](https://developer.apple.com/iphone/index.action)
+[![Language](http://img.shields.io/badge/language-swift-brightgreen.svg?style=flat
+)](https://developer.apple.com/swift)
 [![Version](https://img.shields.io/cocoapods/v/SAWaveToast.svg?style=flat)](http://cocoapods.org/pods/SAWaveToast)
 [![License](https://img.shields.io/cocoapods/l/SAWaveToast.svg?style=flat)](http://cocoapods.org/pods/SAWaveToast)
-[![Platform](https://img.shields.io/cocoapods/p/SAWaveToast.svg?style=flat)](http://cocoapods.org/pods/SAWaveToast)
 
-## Usage
+![](./SampleImage/sample.gif)
 
-To run the example project, clone the repo, and run `pod install` from the Example directory first.
+Show text with wave animated background and floating animation.
 
-## Requirements
+## Features
+
+- [x] Wave aniamtion toast
+- [x] Support NSAttributedString
+- [ ] Culculate wave aniamtion wit gyro
 
 ## Installation
+
+#### CocoaPods
 
 SAWaveToast is available through [CocoaPods](http://cocoapods.org). To install
 it, simply add the following line to your Podfile:
 
-```ruby
+```
 pod "SAWaveToast"
 ```
+
+#### Manually
+
+Add the [SAWaveToast](./SAWaveToast) directory to your project.
+
+## Usage
+
+If you install from cocoapods, You have to write `import SAWaveToast`.
+
+There are two initialize methods.
+```swift
+public convenience init(text: String, font: UIFont? = nil, fontColor: UIColor? = nil, waveColor: UIColor? = nil, duration: NSTimeInterval? = nil)
+public init(attributedText: NSAttributedString, waveColor: UIColor? = nil, duration: NSTimeInterval? = nil)
+```
+
+It is simple to use `SAWaveToast` like `UIAlertController`.
+```swift
+let controller = SAWaveToast(text: "This is SAWaveToast!!")
+presentViewController(controller, animated: false, completion: nil)
+```
+
+## Customize
+
+You can customize text.
+
+### String
+
+```swift
+let waveToast = SAWaveToast(text: "This is SAWaveToast!!", font: .systemFontOfSize(16), fontColor: .darkGrayColor() waveColor: .cyanColor(), duration: 5)
+```
+
+### NSAttributedString
+
+```swift
+let attributes: [NSObject : AnyObject] = [
+    NSFontAttributeName : UIFont.systemFontOfSize(16),
+    NSForegroundColorAttributeName: UIColor.cyanColor()
+]
+let attributedText = NSAttributedString(string: "This is SAWaveToast!! ", attributes: attributes)
+let waveToast = SAWaveToast(attributedText: attributedText, waveColor: .cyanColor(), duration: 5)
+```
+
+## Requirements
+
+- Xcode 6.4 or greater
+- iOS7.0(manually only) or greater
 
 ## Author
 
