@@ -23,8 +23,10 @@ class ViewController: UIViewController {
 
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        
-        let controller = SAWaveToast(text: "Sample text.", waveColor: nil)
+    }
+    
+    @IBAction func showWaveToast(sender: AnyObject) {
+        let controller = SAWaveToast(text: "Sample text. Sample text.Sample text. Sample text. Sample text. Sample text. Sample text. Sample text. Sample text. Sample text. Sample text. Sample text. Sample text. Sample text. Sample text. Sample text. Sample text. Sample text. ", waveColor: nil)
         presentViewController(controller, animated: false, completion: nil)
     }
 }
