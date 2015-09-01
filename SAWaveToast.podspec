@@ -9,12 +9,12 @@
 Pod::Spec.new do |s|
   s.name             = "SAWaveToast"
   s.version          = "0.1.0"
-  s.summary          = "Show text with wave animated background and floating animation.
+  s.summary          = "Show text with wave animated background and floating animation."
 
-  s.homepage         = "https://github.com/SzkAtmosphere/SAWaveToast"
+  s.homepage         = "https://github.com/szk-atmosphere/SAWaveToast"
   s.license          = 'MIT'
   s.author           = { "Taiki Suzuki" => "s1180183@gmail.com" }
-  s.source           = { :git => "https://github.com/szk-atmosphere/SAWaveToast", :tag => s.version.to_s }
+  s.source           = { :git => "https://github.com/szk-atmosphere/SAWaveToast.git", :tag => s.version.to_s }
   s.social_media_url = 'https://twitter.com/SzkAtmosphere'
 
   s.platform     = :ios, '8.0'
