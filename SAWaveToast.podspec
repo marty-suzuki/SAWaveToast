@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = "SAWaveToast"
-  s.version          = "0.1.0"
+  s.version          = "0.2.0"
   s.summary          = "Show text with wave animated background and floating animation."
 
   s.homepage         = "https://github.com/szk-atmosphere/SAWaveToast"

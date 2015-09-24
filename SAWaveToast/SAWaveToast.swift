@@ -27,7 +27,7 @@ public class SAWaveToast: UIViewController {
     private var textViewCenterXConstraint: NSLayoutConstraint?
     
     public convenience init(text: String, font: UIFont? = nil, fontColor: UIColor? = nil, waveColor: UIColor? = nil, duration: NSTimeInterval? = nil) {
-        var attributes: [NSObject : AnyObject] = [NSObject : AnyObject]()
+        var attributes: [String : AnyObject] = [String : AnyObject]()
         if let font = font {
             attributes[NSFontAttributeName] = font
         }
@@ -72,7 +72,7 @@ public class SAWaveToast: UIViewController {
         view.backgroundColor = .clearColor()
         
         let width = UIScreen.mainScreen().bounds.size.width - SAWaveToast.Spaces.left + SAWaveToast.Spaces.right
-        let textHeight = attributedText.boundingRectWithSize(CGSize(width: width, height: CGFloat.max), options: .UsesLineFragmentOrigin | .UsesFontLeading, context: nil).size.height
+        let textHeight = attributedText.boundingRectWithSize(CGSize(width: width, height: CGFloat.max), options: [.UsesLineFragmentOrigin, .UsesFontLeading], context: nil).size.height
         
         setContainerView(textHeight)
         setWaveView(textHeight)
@@ -113,7 +113,7 @@ extension SAWaveToast {
     private func setContainerView(textHeight: CGFloat) {
         view.addSubview(containerView)
         containerView.backgroundColor = .clearColor()
-        containerView.setTranslatesAutoresizingMaskIntoConstraints(false)
+        containerView.translatesAutoresizingMaskIntoConstraints  = false
         let height = textHeight + SAWaveView.Height + SAWaveToast.Spaces.top + SAWaveToast.Spaces.bottom + SAWaveToast.ExtraSpace
         let bottomConstraint = NSLayoutConstraint(item: containerView, attribute: .Bottom, relatedBy: .Equal, toItem: view, attribute: .Bottom, multiplier: 1, constant:height)
         view.addConstraints([
@@ -127,7 +127,7 @@ extension SAWaveToast {
     
     private func setWaveView(textHeight: CGFloat) {
         containerView.addSubview(waveView)
-        waveView.setTranslatesAutoresizingMaskIntoConstraints(false)
+        waveView.translatesAutoresizingMaskIntoConstraints = false
         view.addConstraints([
             NSLayoutConstraint(item: waveView, attribute: .Left, relatedBy: .Equal, toItem: containerView, attribute: .Left, multiplier: 1, constant: 0),
             NSLayoutConstraint(item: waveView, attribute: .Top, relatedBy: .Equal, toItem: containerView, attribute: .Top, multiplier: 1, constant: 0),
@@ -139,7 +139,7 @@ extension SAWaveToast {
     private func setContentView(textHeight: CGFloat) {
         containerView.addSubview(contentView)
         contentView.backgroundColor = waveColor
-        contentView.setTranslatesAutoresizingMaskIntoConstraints(false)
+        contentView.translatesAutoresizingMaskIntoConstraints = false
         view.addConstraints([
             NSLayoutConstraint(item: contentView, attribute: .Left, relatedBy: .Equal, toItem: containerView, attribute: .Left, multiplier: 1, constant: 0),
             NSLayoutConstraint(item: contentView, attribute: .Bottom, relatedBy: .Equal, toItem: containerView, attribute: .Bottom, multiplier: 1, constant: 0),
@@ -151,7 +151,7 @@ extension SAWaveToast {
     private func setTextView(textHeight: CGFloat) {
         contentView.addSubview(textView)
         textView.backgroundColor = .clearColor()
-        textView.setTranslatesAutoresizingMaskIntoConstraints(false)
+        textView.translatesAutoresizingMaskIntoConstraints = false
         textView.userInteractionEnabled = false
         textView.contentInset = UIEdgeInsets(top: -10, left: -4, bottom: 0, right: 0)
         let width = UIScreen.mainScreen().bounds.size.width - (SAWaveToast.Spaces.right + SAWaveToast.Spaces.left)
