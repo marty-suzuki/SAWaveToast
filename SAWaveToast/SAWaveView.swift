@@ -36,7 +36,7 @@ class SAWaveView: UIView {
         shapeLayer.frame = CGRect(x: 0, y: 0, width: bounds.size.width * 2, height: bounds.size.height)
     }
     
-    override func animationDidStop(anim: CAAnimation!, finished flag: Bool) {
+    override func animationDidStop(anim: CAAnimation, finished flag: Bool) {
         shapeLayer.removeAllAnimations()
         if flag {
             startAnimation()
